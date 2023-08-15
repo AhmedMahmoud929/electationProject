@@ -362,4 +362,25 @@ router.get("/export-electors", async (req, res) => {
   }
 });
 
+router.get("/test", (req, res) => {
+  let folderPath = req.query.folderPath;
+
+  // Read the contents of the folder
+  const fs = require("fs");
+  fs.readdir(folderPath, (err, files) => {
+    if (err) {
+      console.error("Error reading folder:", err);
+      res.status(500).send("Not found");
+      return;
+    }
+
+    res.status(200).send(`
+      <h1>Contents of the Folder:</h1>
+      <ul>
+        ${files.map((file) => `<li>${file}</li>`).join("")}
+      </ul>
+    `);
+  });
+});
+
 module.exports = router;
