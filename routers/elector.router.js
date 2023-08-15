@@ -357,26 +357,23 @@ router.get("/export-electors", async (req, res) => {
       .join("\n");
 
     const csvContent = csvHeader + csvRows;
-
-    const fileName = 'exported_electors.csv';
-    const filePath = join('/tmp', fileName); // Use /tmp directory
-
-    // Write the CSV content to the file
-    await fs.writeFile(filePath, csvContent);
+    const filePath = "/tmp/exported_electors.csv";
+    fs.writeFileSync(filePath, csvContent);
 
     // Trigger the download
-    res.download(filePath, fileName, (err) => {
+    res.download(filePath, "hamata.csv", (err) => {
       if (err) {
         console.error("Download error: ", err);
-        res.status(500).send('Error downloading file.');
+        res.status(500).send("Error downloading file.");
       }
 
       // Clean up: Remove the generated CSV file after download
-      fs.unlink(filePath)
-        .catch((unlinkError) => console.error("Cleanup error: ", unlinkError));
+      // fs.unlink(filePath).catch((unlinkError) =>
+      //   console.error("Cleanup error: ", unlinkError)
+      // );
     });
   } catch (err) {
-    console.error("Export error: ", err);
+    console.log("Export error ", err);
     res.status(500).send("Export ERROR");
   }
 });
