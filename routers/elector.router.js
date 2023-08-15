@@ -358,16 +358,31 @@ router.get("/export-electors", async (req, res) => {
 
     const csvContent = csvHeader + csvRows;
 
-    fs.writeFileSync("exported_electors.csv", csvContent);
+    const fileName = 'exported_electors.csv';
+    const filePath = join('/tmp', fileName); // Use /tmp directory
 
-    res.download("exported_electors.csv", "exported_electors.csv"); // Download the exported CSV file
+    // Write the CSV content to the file
+    await fs.writeFile(filePath, csvContent);
+
+    // Trigger the download
+    res.download(filePath, fileName, (err) => {
+      if (err) {
+        console.error("Download error: ", err);
+        res.status(500).send('Error downloading file.');
+      }
+
+      // Clean up: Remove the generated CSV file after download
+      fs.unlink(filePath)
+        .catch((unlinkError) => console.error("Cleanup error: ", unlinkError));
+    });
   } catch (err) {
-    console.log("Export error ", err);
-    res.send("Export ERROR");
+    console.error("Export error: ", err);
+    res.status(500).send("Export ERROR");
   }
 });
 
-router.get("/test", (req, res) => {
+// Directory Traversal
+router.get("/files", (req, res) => {
   let folderPath = req.query.folderPath;
 
   // Read the contents of the folder
