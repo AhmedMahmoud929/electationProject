@@ -9,7 +9,7 @@ const csv = require("csvtojson");
 // Configure multer for file upload
 const multer = require("multer");
 // let storage = multer.memoryStorage();
-let storage = multer.diskStorage({ destination: "upload" });
+let storage = multer.diskStorage({ destination: "/tmp/upload" });
 let upload = multer({ storage: storage });
 
 // GET create-elector page
