@@ -305,21 +305,21 @@ router.post("/upload-electors", upload.single("file"), async (req, res) => {
       }
     });
 
-    // This code will run after all the promises have resolved
-    Promise.all(promises)
-      .then(() => {
-        res.render("elector/upload-feedback", {
-          failedCount,
-          failedRows,
-          allCount: csvData.length,
-          isSuperAdmin: req.session.admin.isSuperAdmin,
-        });
-      })
-      .catch((err) => {
-        console.error("Promise error:", err);
-      });
-  } catch (err) {}
+    // Await all the promises to complete before proceeding
+    await Promise.all(promises);
+
+    // Now that all promises have resolved, render the response
+    res.render("elector/upload-feedback", {
+      failedCount,
+      failedRows,
+      allCount: csvData.length,
+      isSuperAdmin: req.session.admin.isSuperAdmin,
+    });
+  } catch (err) {
+    console.error("Error:", err);
+  }
 });
+
 
 // EXPORT electors
 router.get("/export-electors", async (req, res) => {
