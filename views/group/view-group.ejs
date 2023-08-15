@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard</title>
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <!-- Main Styles -->
+    <link rel="stylesheet" href="../css/index.css" />
+    <link rel="stylesheet" href="../css/group.css" />
+    <link rel="stylesheet" href="../css/form.css" />
+    <link rel="stylesheet" href="../css/table.css" />
+  </head>
+  <body>
+    <!-- HEADER -->
+    <header class="header">
+      <div class="header-content responsive-wrapper">
+        <div class="header-logo">
+          <a href="/">
+            <div>
+              <img
+                src="https://assets.codepen.io/285131/untitled-ui-icon.svg"
+              />
+            </div>
+            <img src="https://assets.codepen.io/285131/untitled-ui.svg" />
+          </a>
+        </div>
+        <i class="fa-solid fa-bars"></i>
+        <a href="/logout" class="button danger">
+          <span>Logout</span>
+        </a>
+      </div>
+    </header>
+    <!-- MAIN -->
+    <main class="main">
+      <div class="responsive-wrapper">
+        <div class="content">
+          <%- include("../parts/aside.ejs", {active:"group-list"}) %>
+          <div class="content-main">
+            <div class="view-group">
+              <!-- Header -->
+              <header>
+                <h1><span><%= group.name %></span></h1>
+                <h2>
+                  number of members : <span><%= group.electors.length %></span>
+                </h2>
+                <div class="group-buttons">
+                  <div style="display: flex; gap: 10px">
+                    <!-- export -->
+                    <a href="/export-electors?group=<%= group.name %>">
+                      <button type="submit" name="deleteButton" class="button">
+                        Export All Group
+                      </button>
+                    </a>
+                    <!--  -->
+                    <a
+                      href="/export-electors?isElected=true&group=<%= group.name %>"
+                    >
+                      <button type="submit" name="deleteButton" class="button">
+                        Export Only Elected
+                      </button>
+                    </a>
+                  </div>
+                  <!-- delete -->
+                  <form method="POST" action="/delete-group">
+                    <input
+                      type="text"
+                      name="groupId"
+                      hidden
+                      value="<%= group._id %>"
+                    />
+                    <button
+                      type="submit"
+                      name="deleteButton"
+                      class="button danger"
+                    >
+                      Delete Group
+                    </button>
+                  </form>
+                </div>
+              </header>
+              <hr />
+              <!-- Search -->
+              <!-- <form action="/search-elector" method="GET" class="search-bar">
+                <input type="hidden" name="groupId" value="<%=// group._id %>" />
+                <label for="searchInput">Search By Name:</label>
+                <input
+                  type="text"
+                  id="searchInput"
+                  name="searchValue"
+                  placeholder="Ahmed Mahmoud"
+                />
+                <button type="submit" class="form-btn">Search</button>
+              </form> -->
+              <div class="forms-cont">
+                <form action="/search-elector" method="GET" class="search-bar">
+                  <input
+                    type="hidden"
+                    name="groupId"
+                    value="<%= group._id %>"
+                  />
+                  <label for="searchInput"
+                    >Search (by name or fully NID):</label
+                  >
+                  <input
+                    type="text"
+                    id="searchInput"
+                    name="searchValue"
+                    placeholder="Ahmed Mahmoud"
+                  />
+                  <div>
+                    <input
+                      type="submit"
+                      class="form-btn"
+                      name="searchWay"
+                      value="Search By Name"
+                    />
+                    <input
+                      style="margin-top: 5px"
+                      type="submit"
+                      class="form-btn"
+                      name="searchWay"
+                      value="Search By NID"
+                    />
+                  </div>
+                </form>
+                <hr />
+                <form action="" class="filter-form">
+                  <label for="searchInput">Filter options:</label>
+                  <div class="filter-options">
+                    <div class="ele">
+                      <label for="onlyElected">only elected:</label>
+                      <a
+                        href="/view-group/<%= group._id %><%= onlyElected ? '' : '?onlyElected=true' %>"
+                        id="onlyElectedCHB"
+                        class="<%= onlyElected ? 'active' : '' %>"
+                      >
+                        <span></span
+                      ></a>
+                    </div>
+                  </div>
+                  <style></style>
+                </form>
+              </div>
+              <hr />
+              <!-- Table -->
+              <table class="elector-table">
+                <tbody>
+                  <tr>
+                    <th>NID</th>
+                    <th>Full Name</th>
+                    <th>Elected?</th>
+                    <th>Actions</th>
+                  </tr>
+                  <% electors.forEach(elector => { %>
+                  <tr>
+                    <td><%= elector.NID %></td>
+                    <td><%= elector.fullName %></td>
+                    <td>
+                      <form
+                        action="/toggle-is-elected/<%= elector._id %>"
+                        method="POST"
+                        id="toggleForm"
+                      >
+                        <%- include("../parts/loader.ejs") %> <input
+                        id="checkBox" type="checkbox" <%= elector.isElected ?
+                        'checked' : '' %> >
+                      </form>
+                    </td>
+                    <td>
+                      <div class="btn-group">
+                        <a href="/view-elector/<%= elector._id %>">
+                          <button class="button">View</button>
+                        </a>
+                        <form
+                          action="/delete-elector/<%= elector._id %>"
+                          method="post"
+                        >
+                          <input
+                            type="text"
+                            hidden
+                            name="groupId"
+                            value="<%= elector.group %>"
+                          />
+                          <button class="button danger">Delete</button>
+                        </form>
+                      </div>
+                    </td>
+                  </tr>
+                  <% }); %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Main Scripts -->
+    <script src="../js/asideToggle.js"></script>
+    <script src="../js/checkboxToggle.js"></script>
+  </body>
+</html>

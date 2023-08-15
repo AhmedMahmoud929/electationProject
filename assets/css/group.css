@@ -1,0 +1,56 @@
+.view-group header {
+  background-color: #fff;
+  padding: 20px 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px 4px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+}
+
+.view-group hr {
+  margin: 30px 0px;
+  opacity: 0.3;
+}
+.view-group header h1 span {
+  font-weight: 900;
+  background-image: linear-gradient(45deg, #842ce2, #4dbeff);
+  -webkit-background-clip: text; /* For Safari and older versions of Chrome */
+  background-clip: text;
+  color: transparent;
+}
+
+.view-group header h2 {
+  color: var(--c-text-primary);
+  font-size: 1.2rem;
+  font-weight: 400;
+}
+.view-group header h2 span {
+  color: var(--c-accent-primary);
+  font-weight: 700;
+}
+
+.view-group header .group-buttons {
+  margin-top: 20px;
+  /* align-self: flex-end; */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.view-group header form button {
+  padding: 0 2em;
+}
+
+.view-group form {
+  margin-top: -10px;
+}
+
+.view-group form button {
+  margin-top: 10px;
+}
+
+@media (max-width: 600px) {
+  .view-group form#toggleForm {
+    margin-top: 10px;
+  }
+}

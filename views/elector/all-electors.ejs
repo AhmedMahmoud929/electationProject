@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard</title>
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <!-- Main Styles -->
+    <link rel="stylesheet" href="../css/index.css" />
+    <link rel="stylesheet" href="../css/group.css" />
+    <link rel="stylesheet" href="../css/form.css" />
+    <link rel="stylesheet" href="../css/table.css" />
+  </head>
+  <body>
+    <!-- HEADER -->
+    <header class="header">
+      <div class="header-content responsive-wrapper">
+        <div class="header-logo">
+          <a href="/">
+            <div>
+              <img
+                src="https://assets.codepen.io/285131/untitled-ui-icon.svg"
+              />
+            </div>
+            <img src="https://assets.codepen.io/285131/untitled-ui.svg" />
+          </a>
+        </div>
+        <i class="fa-solid fa-bars"></i>
+        <a href="/logout" class="button danger">
+          <span>Logout</span>
+        </a>
+      </div>
+    </header>
+    <!-- MAIN -->
+    <main class="main">
+      <div class="responsive-wrapper">
+        <div class="content">
+          <%- include("../parts/aside.ejs",{active:"all-electors"}) %>
+          <div class="content-main">
+            <div class="view-group">
+              <h1 class="title">All Electors</h1>
+              <hr />
+              <div>
+                <label for="">Actions</label>
+                <a href="/export-electors" class="button">
+                  Export All Electors
+                </a>
+                <a href="/export-electors?isElected=true" class="button">
+                  Export Only Elected
+                </a>
+              </div>
+              <!-- FORMS -->
+              <hr />
+              <div class="forms-cont">
+                <form action="/search-elector" method="GET" class="search-bar">
+                  <label for="searchInput"
+                    >Search (by name or fully NID):</label
+                  >
+                  <input
+                    type="text"
+                    id="searchInput"
+                    name="searchValue"
+                    placeholder="Ahmed Mahmoud"
+                  />
+                  <div>
+                    <input
+                      type="submit"
+                      class="form-btn"
+                      name="searchWay"
+                      value="Search By Name"
+                    />
+                    <input
+                      style="margin-top: 5px"
+                      type="submit"
+                      class="form-btn"
+                      name="searchWay"
+                      value="Search By NID"
+                    />
+                  </div>
+                </form>
+                <hr />
+                <form action="" class="filter-form">
+                  <label for="searchInput">Filter options:</label>
+                  <div class="filter-options">
+                    <div class="ele">
+                      <label for="onlyElected">only elected:</label>
+                      <a
+                        href="/all-electors<%= onlyElected ? '' : '?onlyElected=true' %>"
+                        id="onlyElectedCHB"
+                        class="<%= onlyElected ? 'active' : '' %>"
+                      >
+                        <span></span
+                      ></a>
+                    </div>
+                  </div>
+                </form>
+              </div>
+
+              <hr />
+              <!-- Table -->
+              <table class="elector-table">
+                <tbody>
+                  <tr>
+                    <th style="width: 25%">NID</th>
+                    <th style="width: 23%">Full Name</th>
+                    <th style="width: 20%">Group</th>
+                    <th style="width: 10%">Elected?</th>
+                    <th style="width: 22%">Actions</th>
+                  </tr>
+                  <% allElectors.forEach(elector => { %>
+                  <tr>
+                    <td><%= elector.NID %></td>
+                    <td><%= elector.fullName %></td>
+                    <td>
+                      <%= (groups.find((gr) => String(gr._id) ===
+                      String(elector.group)) || {}).name %>
+                    </td>
+                    <td>
+                      <form
+                        action="/toggle-is-elected/<%= elector._id %>"
+                        method="POST"
+                        id="toggleForm"
+                      >
+                        <%- include("../parts/loader.ejs") %> <input
+                        id="checkBox" type="checkbox" <%= elector.isElected ?
+                        'checked' : '' %> >
+                      </form>
+                    </td>
+                    <td>
+                      <div class="btn-group">
+                        <button class="button">
+                          <a href="/view-elector/<%= elector._id %>">View</a>
+                        </button>
+                        <form
+                          action="/delete-elector/<%= elector._id %>"
+                          method="post"
+                        >
+                          <input
+                            type="text"
+                            hidden
+                            name="groupId"
+                            value="<%= elector.group %>"
+                          />
+                          <button class="button danger">Delete</button>
+                        </form>
+                      </div>
+                    </td>
+                  </tr>
+                  <% }); %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Main Scripts -->
+    <script src="../js/asideToggle.js"></script>
+    <script src="../js/checkboxToggle.js"></script>
+    <script></script>
+  </body>
+</html>

@@ -1,0 +1,140 @@
+.card-grid {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 1rem;
+  height: 100%;
+}
+
+.card,
+.is-elected-card {
+  background-color: var(--c-background-primary);
+  height: 270px;
+  width: 303px;
+  box-shadow: 0 0px 3px 0 rgba(0, 0, 0, 0.05), 0 5px 15px 0 rgba(0, 0, 0, 0.03);
+  border-radius: 20px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* padding: 10px 20px; */
+}
+
+.card .icon {
+  width: 60px;
+  height: 60px;
+  background-color: #eee;
+  border-radius: 50%;
+  padding: 15px;
+}
+
+.card h1 {
+  font-size: 3.8rem;
+  color: var(--c-accent-primary);
+  font-weight: 900;
+  line-height: 1.2;
+  margin-top: 10px;
+}
+
+.card h2 {
+  font-size: 1.3rem;
+  color: var(--c-accent-primary);
+  font-weight: 400;
+  opacity: 0.8;
+}
+
+.card a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 7px;
+  text-decoration: none;
+  margin-top: 20px;
+  justify-self: flex-end;
+  color: var(--c-text-primary);
+  transition: 0.3s;
+}
+
+.card a span {
+  font-size: 1.1rem;
+}
+
+.card a i {
+  transition: 0.3s;
+  font-size: 0.9rem;
+  transform-origin: bottom left;
+}
+.card a:hover {
+  color: var(--c-accent-primary);
+}
+.card a:hover i {
+  transform: scale(1.2);
+}
+
+.is-elected-card {
+  width: 100%;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.is-elected-card .left {
+  background-color: var(--c-accent-primary);
+  width: 30%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.is-elected-card .left img {
+  width: 150px;
+  filter: invert(100%);
+}
+
+.is-elected-card .right {
+  width: 70%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 20px;
+}
+
+.is-elected-card .right h1 {
+  color: var(--c-text-primary);
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.is-elected-card .right h2 {
+  color: var(--c-text-primary);
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+.is-elected-card .right h2 span {
+  color: var(--c-accent-primary);
+  font-size: 7rem;
+  font-weight: 900;
+  margin-right: -10px;
+}
+
+.is-elected-card .right .btns {
+  align-self: flex-end;
+  margin-top: -10px;
+}
+
+@media (max-width: 1000px) {
+  .is-elected-card {
+    display: none;
+  }
+}
+
+@media (max-width: 400px) {
+  .card {
+    width: 100%;
+  }
+}

@@ -1,0 +1,134 @@
+.container {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+}
+
+h1.title {
+  text-align: center;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  font-weight: 900;
+  background-image: linear-gradient(45deg, #842ce2, #4dbeff);
+  -webkit-background-clip: text; /* For Safari and older versions of Chrome */
+  background-clip: text;
+  color: transparent;
+}
+
+.form-group {
+  margin-bottom: 10px;
+}
+
+.form-group.is-elected,
+.form-group.election-group {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-start;
+  align-items: center;
+}
+.form-group.is-elected label,
+.form-group.election-group label {
+  font-size: 1.2rem;
+}
+.form-group.is-elected input[type="checkbox"] {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  width: 20px;
+  height: 20px;
+  margin-bottom: 5px;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+.form-group.election-group select {
+  height: 25px;
+  border-radius: 4px;
+  padding: 2px 10px;
+}
+
+.flex-form-group {
+  display: flex;
+  gap: 20px;
+}
+.flex-form-group .form-group {
+  width: 100%;
+}
+
+label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="password"] {
+  width: 100%;
+  padding: 14px 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1.2rem;
+}
+
+.form-btn {
+  display: block;
+  width: 100%;
+  padding: 14px 10px;
+  background-image: linear-gradient(45deg, #4434c9, #4dbeff);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1.2rem;
+  background-size: 100%;
+  transition: 0.4s;
+  margin-top: 20px;
+}
+
+.form-btn:hover {
+  letter-spacing: 3px;
+  background-size: 150%;
+}
+
+.form-btn:hover {
+  background-color: #0056b3;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  .container {
+    max-width: 90%;
+  }
+}
+@media (max-width: 600px) {
+  .flex-form-group {
+    display: block;
+  }
+  .form-group.is-elected label,
+  .form-group.election-group label {
+    font-size: 1rem;
+  }
+  .form-group.election-group {
+    gap: 10px;
+  }
+  .form-group.election-group select {
+    width: 100%;
+  }
+}
+
+.forms-cont .filter-form {
+  margin-bottom: -15px;
+}
+.forms-cont .filter-form .filter-options .ele {
+  display: flex;
+  align-items: center;
+  font-size: 1.1rem;
+  gap: 10px;
+}
+.forms-cont .filter-form .filter-options .ele input[type="checkbox"] {
+  transform: scale(1.5);
+  cursor: pointer;
+  margin-top: -5px;
+}

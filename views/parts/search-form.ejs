@@ -1,0 +1,43 @@
+<!-- ========= HTML ========= -->
+<div class="forms-cont">
+  <form action="/search-elector" method="GET" class="search-bar">
+    <input type="hidden" name="groupId" value="<%= group._id %>" />
+    <label for="searchInput">Search (by name or fully NID):</label>
+    <input
+      type="text"
+      id="searchInput"
+      name="searchValue"
+      placeholder="Ahmed Mahmoud"
+    />
+    <div>
+      <input
+        type="submit"
+        class="form-btn"
+        name="searchWay"
+        value="Search By Name"
+      />
+      <input
+        style="margin-top: 5px"
+        type="submit"
+        class="form-btn"
+        name="searchWay"
+        value="Search By NID"
+      />
+    </div>
+  </form>
+  <hr />
+  <form action="" class="filter-form">
+    <label for="searchInput">Filter options:</label>
+    <div class="filter-options">
+      <div class="ele">
+        <label for="onlyElected">only elected:</label>
+        <input id="onlyElected" type="checkbox" />
+      </div>
+    </div>
+  </form>
+</div>
+
+<!-- ========= CSS ========= -->
+<style>
+
+</style>

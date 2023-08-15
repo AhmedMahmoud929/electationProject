@@ -1,0 +1,44 @@
+<div class="content-panel">
+  <i class="fa-solid fa-xmark"></i>
+  <div class="vertical-tabs">
+    <a href="/" class="<%= active === 'overview' ? 'active' : '' %>"
+      >Overview</a
+    >
+    <% if (isSuperAdmin) { %>
+    <a
+      href="/create-admin"
+      class="<%= active === 'create-admin' ? 'active' : '' %>"
+      >Add Admin</a
+    >
+    <a href="/admin-list" class="<%= active === 'admin-list' ? 'active' : '' %>"
+      >View All Admins</a
+    >
+    <% } %>
+    <a
+      href="/create-group"
+      class="<%= active === 'create-group' ? 'active' : '' %>"
+      >Add Group</a
+    >
+    <a href="/group-list" class="<%= active === 'group-list' ? 'active' : '' %>"
+      >View All Groups</a
+    >
+    <a
+      href="/create-elector"
+      class="<%= active === 'create-elector' ? 'active' : '' %>"
+      >Add Elector</a
+    >
+    <a
+      href="/all-electors"
+      class="<%= active === 'all-electors' ? 'active' : '' %>"
+      >View All Electors</a
+    >
+    <a
+      href="/upload-electors"
+      class="<%= active === 'upload-electors' ? 'active' : '' %>"
+      >Upload CSV file</a
+    >
+  </div>
+  <a href="/logout" class="button danger">
+    <span>Logout</span>
+  </a>
+</div>

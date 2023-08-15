@@ -1,0 +1,322 @@
+@import url("https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+:root {
+  --c-text-primary: #282a32;
+  --c-text-secondary: #686b87;
+  --c-text-action: #404089;
+  --c-accent-primary: #434ce8;
+  --c-border-primary: #eff1f6;
+  --c-background-primary: #ffffff;
+  --c-background-secondary: #fdfbff;
+  --c-background-tertiary: #ecf3fe;
+  --c-background-quaternary: #e9ecf4;
+}
+
+* {
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
+}
+
+body {
+  line-height: 1.5;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: "Be Vietnam Pro", sans-serif;
+  background-color: var(--c-background-secondary);
+  color: var(--c-text-primary);
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+:focus {
+  outline: 0;
+}
+
+html::-webkit-scrollbar {
+  width: 12px;
+}
+html::-webkit-scrollbar-thumb {
+  background-color: var(--c-text-primary);
+  border: 4px solid var(--c-background-primary);
+  border-radius: 99em;
+}
+
+/* Shared Styles */
+.responsive-wrapper {
+  width: 90%;
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  padding: 20px 0px;
+  border-bottom: 1px solid var(--c-border-primary);
+  background-color: var(--c-background-primary);
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.header-content > a {
+  padding: 0 2em !important;
+}
+
+.header-logo {
+  margin-right: 2.5rem;
+}
+.header-logo a {
+  display: flex;
+  align-items: center;
+}
+
+.button {
+  font: inherit;
+  color: inherit;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 1.5em;
+  height: 40px;
+  border-radius: 8px;
+  line-height: 1;
+  border: 2px solid var(--c-border-primary);
+  color: var(--c-text-action);
+  font-size: 0.875rem;
+  transition: 0.15s ease;
+  background-color: var(--c-background-primary);
+  cursor: pointer;
+}
+.button i {
+  margin-right: 0.5rem;
+  font-size: 1.25em;
+}
+.button span {
+  font-weight: 500;
+}
+.button:hover,
+.button:focus {
+  border-color: var(--c-accent-primary);
+  color: var(--c-accent-primary);
+}
+.button.danger {
+  border: 2px solid #f0dfdf;
+  color: #894040;
+}
+.button.danger:hover,
+.button.danger:focus {
+  border-color: #e84343;
+  color: #e84343;
+}
+
+header .fa-bars {
+  display: none;
+}
+
+.content {
+  display: flex;
+  align-items: flex-start;
+  height: 100%;
+}
+
+.content-panel {
+  display: block;
+  max-width: 280px;
+  width: 25%;
+  padding: 2rem 1rem 2rem 0;
+  margin-right: 3rem;
+}
+.content-panel .fa-xmark,
+.content-panel .button {
+  display: none;
+}
+.vertical-tabs {
+  display: flex;
+  flex-direction: column;
+}
+.vertical-tabs a {
+  display: flex;
+  align-items: center;
+  padding: 0.75em 1em;
+  background-color: transparent;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 500;
+  color: var(--c-text-action);
+  transition: 0.15s ease;
+}
+.vertical-tabs a:hover,
+.vertical-tabs a:focus,
+.vertical-tabs a.active {
+  background-color: var(--c-background-tertiary);
+  color: var(--c-accent-primary);
+}
+.vertical-tabs a + * {
+  margin-top: 0.25rem;
+}
+main,
+main .responsive-wrapper {
+  height: 100%;
+}
+
+.content-main {
+  padding: 2rem;
+  flex-grow: 1;
+  border-left: 2px solid #eee;
+  min-height: 100%;
+}
+
+section#loginPage {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+section#loginPage .cont {
+  width: 450px;
+  padding: 80px 40px;
+  margin-top: -100px;
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: 0px 5px 20px 5px rgba(0, 0, 0, 0.02);
+}
+
+@media (max-width: 1000px) {
+  /* NAV */
+  header a.button {
+    display: none;
+  }
+  header .fa-bars {
+    display: block;
+    font-size: 1.8rem;
+    color: var(--c-text-action);
+    cursor: pointer;
+    transition: 0.4s;
+  }
+  .header .fa-bars:hover {
+    color: var(--c-accent-primary);
+  }
+  /* ASIDE */
+  .content-panel {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    background-color: #fff;
+    top: 0px;
+    left: -300px;
+    width: 100%;
+    height: 100%;
+    z-index: 99;
+    padding: 20px;
+    box-shadow: 0px 0px 20px 10px rgba(0, 0, 0, 0.2);
+    transition: 0.4s;
+  }
+  .content-panel.opened {
+    left: 0px;
+  }
+  .content-panel .fa-xmark {
+    display: flex;
+    align-self: flex-end;
+    color: var(--c-text-secondary);
+    font-size: 2rem;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: 0.4s;
+  }
+  .content-panel .fa-xmark:hover {
+    color: var(--c-accent-primary);
+  }
+  .content-panel .button {
+    display: flex;
+    margin-top: 30px;
+  }
+  /* MAIN */
+  .content-main {
+    border-left: none;
+    padding: 2rem 1rem;
+  }
+  .content-main.view-admins {
+    border-left: none;
+    padding: 1rem 0px;
+  }
+  section#loginPage .cont {
+    width: 450px;
+    padding: 80px 20px;
+    margin-top: -100px;
+    background-color: transparent;
+    box-shadow: none;
+  }
+}
+
+/* Flash Messages Container */
+.flash-messages {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Flash Message Styles */
+.flash-message {
+  display: inline-block;
+  padding: 14px 20px;
+  text-align: center;
+  margin: 0px 0px 10px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 500;
+  width: 100%;
+}
+
+/* Success Flash Message */
+.flash-message.success {
+  background-color: #4caf50;
+  color: white;
+}
+
+/* Error Flash Message */
+.flash-message.error {
+  background-color: #f44336;
+  color: white;
+}
+
+/* Info Flash Message */
+.flash-message.info {
+  font-size: 1.2rem;
+  font-weight: 400;
+  background-color: #1e005eaf;
+  color: white;
+}
+#onlyElectedCHB {
+  width: 22px;
+  height: 22px;
+  border-radius: 5px;
+  border: 2px solid rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  padding: 3px;
+  margin-top: -5px;
+}
+#onlyElectedCHB.active {
+  border: 2px solid #4caf50;
+}
+#onlyElectedCHB.active span {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-color: #4caf50;
+  border-radius: 2px;
+}
